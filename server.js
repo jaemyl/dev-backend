@@ -21,8 +21,19 @@ let collectionStore = {}
 async function setupDb() {
   try {
     const db = await mongodb.connect(DB_URI);
-    collectionStore[COLLECTION_NAME_1] = db.collection(COLLECTION_NAME_1)
-    collectionStore[COLLECTION_NAME_2] = db.collection(COLLECTION_NAME_2)
+
+    const coll1 = db.collection(COLLECTION_NAME_1)
+    if (coll1 === undefined) {
+      db.createCollection(COLLECTION_NAME_1)
+    } 
+    collectionStore[COLLECTION_NAME_1] = coll1
+    
+    const coll2 = db.collection(COLLECTION_NAME_2)
+    if (coll2 === undefined) {
+      db.createCollection(COLLECTION_NAME_2)
+    }
+    collectionStore[COLLECTION_NAME_2] = coll2
+    
     console.log('DB Connected')
   }
   catch (err) {
