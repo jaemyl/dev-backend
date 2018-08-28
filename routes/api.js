@@ -30,9 +30,13 @@ async function onApi1Load(req, res) {
   console.log('onApi1Load()')
   const collection = req.collectionStore['coll1']
 
-  const result = await collection.find().toArray()
-
-  res.json(result);
+  try {
+    const result = await collection.find().toArray()
+    res.json(result);
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.get('/api1/load', onApi1Load)
 
@@ -44,9 +48,14 @@ async function onApi1Save(req, res) {
   const text = req.body.text
 
   const newEntry = { name: name, text: text }
-  const result = await collection.insertOne(newEntry)
 
-  res.json(result);
+  try {
+    const result = await collection.insertOne(newEntry)
+    res.json(result)
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.post('/api1/save', jsonParser, onApi1Save);
 
@@ -54,9 +63,13 @@ async function onApi1Delete(req, res) {
   console.log('onApi1Delete()')
   const collection = req.collectionStore['coll1']
 
-  const result = await collection.deleteMany()
-
-  res.json(result);
+  try {
+    const result = await collection.deleteMany()
+    res.json(result)
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.delete('/api1', jsonParser, onApi1Delete);
 
@@ -66,9 +79,13 @@ async function onApi2Load(req, res) {
   console.log('onApi2Load()')
   const collection = req.collectionStore['coll2']
 
-  const result = await collection.find().toArray()
-
-  res.json(result);
+  try {
+    const result = await collection.find().toArray()
+    res.json(result);
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.get('/api2/load', onApi2Load)
 
@@ -80,9 +97,14 @@ async function onApi2Save(req, res) {
   const text = req.body.text
 
   const newEntry = { name: name, text: text }
-  const result = await collection.insertOne(newEntry)
 
-  res.json(result);
+  try {
+    const result = await collection.insertOne(newEntry)
+    res.json(result)
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.post('/api2/save', jsonParser, onApi2Save);
 
@@ -90,9 +112,13 @@ async function onApi2Delete(req, res) {
   console.log('onApi2Delete()')
   const collection = req.collectionStore['coll2']
 
-  const result = await collection.deleteMany()
-
-  res.json(result);
+  try {
+    const result = await collection.deleteMany()
+    res.json(result)
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 router.delete('/api2', jsonParser, onApi2Delete);
 
